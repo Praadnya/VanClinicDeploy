@@ -125,11 +125,27 @@ const Home = () => {
               <Title level={2} className="text-xl md:text-2xl font-bold">Reference Links</Title>
             </div>
             <ul className="list-disc pl-5 space-y-2">
-              {referenceLinks.map(link => (
-                <li key={link._id}>
-                  <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-base md:text-lg">{link.text}</a>
-                </li>
-              ))}
+              {referenceLinks.map(link => {
+                const [plainText, hyperlink] = link.text.split('URL', 2); 
+                return (
+                  <li key={link._id}>
+                    <span className="text-base md:text-lg font-semibold">{plainText}</span>
+                    {hyperlink && (
+                      <>
+                        <span>: </span>
+                        <a
+                          href={hyperlink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-teal-600 hover:underline text-base md:text-lg"
+                        >
+                          {hyperlink.trim()}
+                        </a>
+                      </>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
         </div>
