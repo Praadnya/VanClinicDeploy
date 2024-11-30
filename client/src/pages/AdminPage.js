@@ -754,70 +754,77 @@ const generateRepPDF = (reportsData, form) => {
               <TextArea rows={4} />
             </Form.Item>
             <Form.Item name="treatment" label="Treatment">
-              <Table
-                dataSource={prescriptionData}
-                columns={[
-                  { 
-                    title: 'Medicine Name', 
-                    dataIndex: 'medicineName', 
-                    key: 'medicineName',
-                    render: (_, record) => (
-                      <Input 
-                        value={record.medicineName} 
-                        onChange={e => handleChange(e, record.key, 'medicineName')} 
-                      />
-                    )
-                  },
-                  { 
-                    title: 'Frequency', 
-                    dataIndex: 'frequency', 
-                    key: 'frequency',
-                    render: (_, record) => (
-                      <Input 
-                        value={record.frequency} 
-                        onChange={e => handleChange(e, record.key, 'frequency')} 
-                      />
-                    )
-                  },
-                  { 
-                    title: 'Number of Days', 
-                    dataIndex: 'numberOfDays', 
-                    key: 'numberOfDays',
-                    render: (_, record) => (
-                      <Input 
-                        type="number" 
-                        min={1} 
-                        value={record.numberOfDays} 
-                        onChange={e => handleChange(e, record.key, 'numberOfDays')} 
-                      />
-                    )
-                  },
-                  { 
-                    title: 'Special Instructions', 
-                    dataIndex: 'specialInstructions', 
-                    key: 'specialInstructions',
-                    render: (_, record) => (
-                      <Input 
-                        value={record.specialInstructions} 
-                        onChange={e => handleChange(e, record.key, 'specialInstructions')} 
-                      />
-                    )
-                  },
-                  {
-                    title: 'Actions',
-                    key: 'actions',
-                    render: (_, record) => (
-                      <Space size="middle">
-                        <Button onClick={() => handleDelete(record.key)}>Delete</Button>
-                      </Space>
-                    ),
-                  },
-                ]}
-                rowKey="key"
-                pagination={false}
-              />
-              <Button type="dashed" onClick={handleAddRow}>Add More Rows</Button>
-            </Form.Item>
+  <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+    <Table
+      dataSource={prescriptionData}
+      columns={[
+        { 
+          title: 'Medicine Name', 
+          dataIndex: 'medicineName', 
+          key: 'medicineName',
+          render: (_, record) => (
+            <Input 
+              value={record.medicineName} 
+              onChange={e => handleChange(e, record.key, 'medicineName')} 
+            />
+          )
+        },
+        { 
+          title: 'Frequency', 
+          dataIndex: 'frequency', 
+          key: 'frequency',
+          render: (_, record) => (
+            <Input 
+              value={record.frequency} 
+              onChange={e => handleChange(e, record.key, 'frequency')} 
+            />
+          )
+        },
+        { 
+          title: 'Number of Days', 
+          dataIndex: 'numberOfDays', 
+          key: 'numberOfDays',
+          render: (_, record) => (
+            <Input 
+              type="number" 
+              min={1} 
+              value={record.numberOfDays} 
+              onChange={e => handleChange(e, record.key, 'numberOfDays')} 
+            />
+          )
+        },
+        { 
+          title: 'Special Instructions', 
+          dataIndex: 'specialInstructions', 
+          key: 'specialInstructions',
+          render: (_, record) => (
+            <Input 
+              value={record.specialInstructions} 
+              onChange={e => handleChange(e, record.key, 'specialInstructions')} 
+            />
+          )
+        },
+        {
+          title: 'Actions',
+          key: 'actions',
+          render: (_, record) => (
+            <Space size="middle">
+              <Button onClick={() => handleDelete(record.key)}>Delete</Button>
+            </Space>
+          ),
+        },
+      ]}
+      rowKey="key"
+      pagination={false}
+    />
+  </div>
+
+  {/* Add More Rows Button */}
+  <div className="mt-4">
+    <Button type="dashed" onClick={handleAddRow}>Add More Rows</Button>
+  </div>
+</Form.Item>
+
             <Form.Item name="investigations" label="Investigations">
               <TextArea rows={4} />
             </Form.Item>
@@ -846,6 +853,7 @@ const generateRepPDF = (reportsData, form) => {
       content: (
         <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', backgroundColor: '#fff', wordWrap: 'break-word'  }}>
           <Title level={4}>Personal Details</Title>
+          
           <Table 
             dataSource={[
               { key: 'Name', value: form.getFieldValue('name') },
@@ -863,6 +871,7 @@ const generateRepPDF = (reportsData, form) => {
             className="styled-table"
           />
           <Title level={4}>Prescription Details</Title>
+          <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
           <Table
             dataSource={[
               { key: 'Mode', value: form.getFieldValue('mode') },
@@ -931,22 +940,26 @@ const generateRepPDF = (reportsData, form) => {
             style={{ marginBottom: '20px' }}
             className="styled-table"
           />
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            <Button 
-              type="primary" 
-              onClick={handleDownloadPDF}
-              style={{ backgroundColor: '#38B2AC', borderColor: '#38B2AC' }}
-            >
-              Download Prescription
-            </Button>
-            <Button
-              type="primary"
-              onClick={() => generateRepPDF(reportsData, form)} 
-              style={{ backgroundColor: '#38B2AC', borderColor: '#38B2AC' }}
-            >
-              Download Report 
-            </Button>
           </div>
+          
+          <div className="flex flex-col items-center gap-4 mt-4">
+  <Button 
+    type="primary" 
+    onClick={handleDownloadPDF}
+    style={{ backgroundColor: '#38B2AC', borderColor: '#38B2AC' }}
+  >
+    Download Prescription
+  </Button>
+  
+  <Button
+    type="primary"
+    onClick={() => generateRepPDF(reportsData, form)} 
+    style={{ backgroundColor: '#38B2AC', borderColor: '#38B2AC'}}
+  >
+    Download Report 
+  </Button>
+</div>
+
 
           <Modal
         title="Reports"
