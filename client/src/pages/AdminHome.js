@@ -231,8 +231,8 @@ const AdminHome = () => {
     <Layout className="layout min-h-screen flex flex-col">
       <Header className="bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-md">
         <div className="flex justify-between items-center max-w-6xl mx-auto">
-          <div className="text-2xl font-bold">Vanamala Clinic</div>
-          <div className="flex items-center space-x-4">
+          <div className="text-xl font-bold">Vanamala Clinic</div>
+          <div className="flex space-x-2">
             <Link to="/admin">
               <Button className="bg-white text-black border-none hover:bg-teal-100" type="primary">Prescribe</Button>
             </Link>
